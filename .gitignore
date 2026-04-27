@@ -4,3 +4,4 @@ __pycache__/
 *.sqlite3
 *.pkl
 *.csv
+!final_food_dataset_final.csv
