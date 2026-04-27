@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Meal Plan{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>{{ title }}</h2>
+  <p class="section-copy">Generate a simple Breakfast, Lunch, and Dinner plan based on your goal.</p>
+
+  <form method="POST" class="form-grid">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Generate Meal Plan</button>
+  </form>
+</section>
+
+<section class="panel">
+  <h3>Breakfast</h3>
+  {% if meal_plan.breakfast.name %}
+    <article class="result-card">
+      <h4>{{ meal_plan.breakfast.name }}</h4>
+      <p class="meta-line">
+        <span>Calories: {{ meal_plan.breakfast.calories }}</span>
+        <span>Diet: {{ meal_plan.breakfast.diet }}</span>
+        <span class="health-label {% if meal_plan.breakfast.health_label == 'Low Calorie' %}health-low{% elif meal_plan.breakfast.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ meal_plan.breakfast.health_label }}</span>
+        <span class="score-pill">Health Score: {{ meal_plan.breakfast.health_score_text }}</span>
+      </p>
+      <p class="explanation-text">{{ meal_plan.breakfast.explanation }}</p>
+    </article>
+  {% else %}
+    <div class="notice">No breakfast recommendation available.</div>
+  {% endif %}
+</section>
+
+<section class="panel">
+  <h3>Lunch</h3>
+  {% if meal_plan.lunch.name %}
+    <article class="result-card">
+      <h4>{{ meal_plan.lunch.name }}</h4>
+      <p class="meta-line">
+        <span>Calories: {{ meal_plan.lunch.calories }}</span>
+        <span>Diet: {{ meal_plan.lunch.diet }}</span>
+        <span class="health-label {% if meal_plan.lunch.health_label == 'Low Calorie' %}health-low{% elif meal_plan.lunch.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ meal_plan.lunch.health_label }}</span>
+        <span class="score-pill">Health Score: {{ meal_plan.lunch.health_score_text }}</span>
+      </p>
+      <p class="explanation-text">{{ meal_plan.lunch.explanation }}</p>
+    </article>
+  {% else %}
+    <div class="notice">No lunch recommendation available.</div>
+  {% endif %}
+</section>
+
+<section class="panel">
+  <h3>Dinner</h3>
+  {% if meal_plan.dinner.name %}
+    <article class="result-card">
+      <h4>{{ meal_plan.dinner.name }}</h4>
+      <p class="meta-line">
+        <span>Calories: {{ meal_plan.dinner.calories }}</span>
+        <span>Diet: {{ meal_plan.dinner.diet }}</span>
+        <span class="health-label {% if meal_plan.dinner.health_label == 'Low Calorie' %}health-low{% elif meal_plan.dinner.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ meal_plan.dinner.health_label }}</span>
+        <span class="score-pill">Health Score: {{ meal_plan.dinner.health_score_text }}</span>
+      </p>
+      <p class="explanation-text">{{ meal_plan.dinner.explanation }}</p>
+    </article>
+  {% else %}
+    <div class="notice">No dinner recommendation available.</div>
+  {% endif %}
+</section>
+{% endblock %}

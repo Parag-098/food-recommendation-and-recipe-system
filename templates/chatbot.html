@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Chatbot Recommendation{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>Chatbot Query</h2>
+  <p class="section-copy">Describe what you want in plain language.</p>
+  <form method="POST" class="form-grid">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Ask</button>
+  </form>
+</section>
+{% endblock %}

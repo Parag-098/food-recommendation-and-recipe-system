@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+<section class="panel">
+<h2>{{ title }}</h2>
+
+{% if results %}
+  <div class="results-grid">
+    {% for row in results %}
+      <article class="result-card">
+        <h3>{{ row.name }}</h3>
+        <p class="meta-line">
+          <span>Calories: {{ row.calories }}</span>
+          <span>Diet: {{ row.diet }}</span>
+          <span class="health-label {% if row.health_label == 'Low Calorie' %}health-low{% elif row.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ row.health_label }}</span>
+          <span class="score-pill">Health Score: {{ row.health_score_text }}</span>
+        </p>
+        <p class="explanation-text">{{ row.explanation }}</p>
+
+        <form method="POST" action="{% url 'save_favorite' %}" class="save-form">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{ row.name }}">
+          <input type="hidden" name="calories" value="{{ row.calories }}">
+          <input type="hidden" name="diet" value="{{ row.diet }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="button secondary">Save</button>
+        </form>
+
+        <section class="detail-section">
+          <h4>Ingredients</h4>
+          {% if row.ingredients_items %}
+            <ul>
+              {% for item in row.ingredients_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Ingredients not available</p>
+          {% endif %}
+        </section>
+
+        <section class="detail-section">
+          <h4>Steps</h4>
+          {% if row.steps_available %}
+            <ol>
+              {% for step in row.steps_items %}
+                <li>{{ step }}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>Preparation steps not available</p>
+          {% endif %}
+        </section>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="notice">{{ empty_message }}</div>
+{% endif %}
+
+<p><a class="button secondary" href="{{ back_url }}">Go Back</a></p>
+</section>
+{% endblock %}

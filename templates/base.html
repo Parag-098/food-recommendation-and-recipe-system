@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Smart Food Recommendation System{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-block">
+        <p class="eyebrow">Nutrition Assistant</p>
+        <h1>Smart Food Recommendation System</h1>
+      </div>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'goal' %}">Goal</a>
+        <a href="{% url 'custom' %}">Custom</a>
+        <a href="{% url 'ingredients' %}">Ingredients</a>
+        <a href="{% url 'chatbot' %}">Chatbot</a>
+        <a href="{% url 'demo' %}">Demo</a>
+        <a href="{% url 'meal_plan' %}">Meal Plan</a>
+        <a href="{% url 'favorites' %}">Favorites</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Smart Food Recommendation System</p>
+    </div>
+  </footer>
+</body>
+</html>

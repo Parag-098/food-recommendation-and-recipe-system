@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}Demo Mode{% endblock %}
+
+{% block content %}
+<section class="panel">
+<h2>Demo Mode</h2>
+<p class="section-copy">Prebuilt recommendation scenarios for gym_user, sick_user, and normal_user.</p>
+
+<section class="demo-section">
+  <h3>gym_user (muscle_gain)</h3>
+  <div class="results-grid">
+    {% for row in gym_results %}
+      <article class="result-card">
+        <h4>{{ row.name }}</h4>
+        <p class="meta-line">
+          <span>Calories: {{ row.calories }}</span>
+          <span>Diet: {{ row.diet }}</span>
+          <span class="health-label {% if row.health_label == 'Low Calorie' %}health-low{% elif row.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ row.health_label }}</span>
+          <span class="score-pill">Health Score: {{ row.health_score_text }}</span>
+        </p>
+        <p class="explanation-text">{{ row.explanation }}</p>
+
+        <form method="POST" action="{% url 'save_favorite' %}" class="save-form">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{ row.name }}">
+          <input type="hidden" name="calories" value="{{ row.calories }}">
+          <input type="hidden" name="diet" value="{{ row.diet }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="button secondary">Save</button>
+        </form>
+
+        <section class="detail-section">
+          <h5>Ingredients</h5>
+          {% if row.ingredients_items %}
+            <ul>
+              {% for item in row.ingredients_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Ingredients not available</p>
+          {% endif %}
+        </section>
+
+        <section class="detail-section">
+          <h5>Steps</h5>
+          {% if row.steps_available %}
+            <ol>
+              {% for step in row.steps_items %}
+                <li>{{ step }}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>Preparation steps not available</p>
+          {% endif %}
+        </section>
+      </article>
+    {% empty %}
+      <div class="notice">No recommendations found.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="demo-section">
+  <h3>sick_user (light food)</h3>
+  <div class="results-grid">
+    {% for row in sick_results %}
+      <article class="result-card">
+        <h4>{{ row.name }}</h4>
+        <p class="meta-line">
+          <span>Calories: {{ row.calories }}</span>
+          <span>Diet: {{ row.diet }}</span>
+          <span class="health-label {% if row.health_label == 'Low Calorie' %}health-low{% elif row.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ row.health_label }}</span>
+          <span class="score-pill">Health Score: {{ row.health_score_text }}</span>
+        </p>
+        <p class="explanation-text">{{ row.explanation }}</p>
+
+        <form method="POST" action="{% url 'save_favorite' %}" class="save-form">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{ row.name }}">
+          <input type="hidden" name="calories" value="{{ row.calories }}">
+          <input type="hidden" name="diet" value="{{ row.diet }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="button secondary">Save</button>
+        </form>
+
+        <section class="detail-section">
+          <h5>Ingredients</h5>
+          {% if row.ingredients_items %}
+            <ul>
+              {% for item in row.ingredients_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Ingredients not available</p>
+          {% endif %}
+        </section>
+
+        <section class="detail-section">
+          <h5>Steps</h5>
+          {% if row.steps_available %}
+            <ol>
+              {% for step in row.steps_items %}
+                <li>{{ step }}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>Preparation steps not available</p>
+          {% endif %}
+        </section>
+      </article>
+    {% empty %}
+      <div class="notice">No recommendations found.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="demo-section">
+  <h3>normal_user (maintain)</h3>
+  <div class="results-grid">
+    {% for row in normal_results %}
+      <article class="result-card">
+        <h4>{{ row.name }}</h4>
+        <p class="meta-line">
+          <span>Calories: {{ row.calories }}</span>
+          <span>Diet: {{ row.diet }}</span>
+          <span class="health-label {% if row.health_label == 'Low Calorie' %}health-low{% elif row.health_label == 'High Energy' %}health-high{% else %}health-balanced{% endif %}">{{ row.health_label }}</span>
+          <span class="score-pill">Health Score: {{ row.health_score_text }}</span>
+        </p>
+        <p class="explanation-text">{{ row.explanation }}</p>
+
+        <form method="POST" action="{% url 'save_favorite' %}" class="save-form">
+          {% csrf_token %}
+          <input type="hidden" name="name" value="{{ row.name }}">
+          <input type="hidden" name="calories" value="{{ row.calories }}">
+          <input type="hidden" name="diet" value="{{ row.diet }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <button type="submit" class="button secondary">Save</button>
+        </form>
+
+        <section class="detail-section">
+          <h5>Ingredients</h5>
+          {% if row.ingredients_items %}
+            <ul>
+              {% for item in row.ingredients_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Ingredients not available</p>
+          {% endif %}
+        </section>
+
+        <section class="detail-section">
+          <h5>Steps</h5>
+          {% if row.steps_available %}
+            <ol>
+              {% for step in row.steps_items %}
+                <li>{{ step }}</li>
+              {% endfor %}
+            </ol>
+          {% else %}
+            <p>Preparation steps not available</p>
+          {% endif %}
+        </section>
+      </article>
+    {% empty %}
+      <div class="notice">No recommendations found.</div>
+    {% endfor %}
+  </div>
+</section>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Food Name Recommendation{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>Food Name Search</h2>
+  <p class="section-copy">Enter a food you like and get similar options.</p>
+  <form method="POST" class="form-grid">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Search</button>
+  </form>
+
+  {% if error %}
+    <div class="notice error">{{ error }}</div>
+  {% endif %}
+
+  {% if suggestions %}
+    <div class="notice">
+      <strong>Suggestions:</strong>
+      <ul>
+        {% for item in suggestions %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

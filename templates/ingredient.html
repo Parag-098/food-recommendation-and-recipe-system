@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Ingredient Recommendation{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>Ingredient-based Recommendation</h2>
+  <p class="section-copy">Enter one or more ingredients separated by commas.</p>
+  <form method="POST" class="form-grid">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Get Recommendations</button>
+  </form>
+</section>
+{% endblock %}

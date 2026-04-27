@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Goal Recommendation{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>Goal-based Recommendation</h2>
+  <p class="section-copy">Select your goal to receive tailored recommendations.</p>
+  <form method="POST" class="form-grid">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Get Recommendations</button>
+  </form>
+</section>
+{% endblock %}

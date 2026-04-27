@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Smart Food Recommendation System{% endblock %}
+
+{% block content %}
+<section class="panel hero-panel">
+  <h2>Find Better Meals in Seconds</h2>
+  <p class="section-copy">Choose a recommendation mode below to discover foods by goal, ingredients, name, or guided chatbot query.</p>
+</section>
+
+<section class="intro-grid">
+  <a class="action-card" href="{% url 'goal' %}">Goal-based Recommendation</a>
+  <a class="action-card" href="{% url 'custom' %}">Custom Filters</a>
+  <a class="action-card" href="{% url 'name' %}">Food Name Search</a>
+  <a class="action-card" href="{% url 'ingredients' %}">Ingredient Match</a>
+  <a class="action-card" href="{% url 'chatbot' %}">Chatbot Assistant</a>
+  <a class="action-card" href="{% url 'demo' %}">Demo Scenarios</a>
+  <a class="action-card" href="{% url 'meal_plan' %}">Meal Plan</a>
+  <a class="action-card" href="{% url 'favorites' %}">Favorites</a>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Favorites{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2>{{ title }}</h2>
+  <p class="section-copy">Saved recipes from your recommendation results.</p>
+
+  {% if favorites %}
+    <div class="results-grid">
+      {% for item in favorites %}
+        <article class="result-card">
+          <h3>{{ item.name }}</h3>
+          <p class="meta-line">
+            <span>Calories: {{ item.calories }}</span>
+            <span>Diet: {{ item.diet }}</span>
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="notice">No favorites saved yet.</div>
+  {% endif %}
+</section>
+{% endblock %}
